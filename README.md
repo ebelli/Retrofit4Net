@@ -7,5 +7,20 @@ Creates and return a singleton RestAdapter to be used throughout all the applica
 
 # How to use
 
+		RetrofitManager.setEndpoint(*Add the http of your server*); //This is mandatory
+		RetrofitManager.setRequestInterceptor(); //To add a Request Inteceptor (like for adding a User Agent to http calls)
+		RestAdapter.Log retrofitLog = new RestAdapter.Log() {
+			@Override
+			public void log(String msg) {
+				Log.i("HTTP", msg);
+			}
+		};
+		RetrofitManager.setLog(retrofitLog); //Without this nothing will be logged
+		
 
- 
+	ApiManager mApiManager;
+	       try {
+            mApiManager = RetrofitManager.get();
+        } catch (EndpointNotFoundException e) {
+           *if you don't call setEndpoint() this exception will be thrown
+        }
